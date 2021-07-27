@@ -13,8 +13,8 @@ contract TokenBar is ERC20, Swap{
     IERC20 public token;
 
     // Define the Token token contract
-    constructor(IERC20 _token, address _uniV2Router) ERC20("TokenBar", "xTOKEN") Swap(address(msg.sender), _uniV2Router){
-        token = _token;
+    constructor(address _token, address _uniV2Router) ERC20("TokenBar", "xTOKEN") Swap(address(msg.sender), _uniV2Router){
+        token = IERC20(_token);
     }
 
     // Enter the bar. Pay some TOKENs. Earn some shares.
