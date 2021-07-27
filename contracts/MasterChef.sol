@@ -4,10 +4,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
-interface IContraxMintableERC20 is IERC20{
-    function mint(address _who, uint _amount)external;
-}
+import "./interfaces/IContraxMintableERC20.sol";
 
 interface IMigratorChef {
     function migrate(IERC20 token) external returns (IERC20);
