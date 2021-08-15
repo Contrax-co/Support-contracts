@@ -55,8 +55,8 @@ contract SupportFactory{
     * @param _devFee is the dev fee to give the dev. Obviously.
     * @param _endTime is the time the LGE is over
      */
-    function buildLGE(address _token, uint _supply, uint _devFee, uint _endTime)external returns(address){
-        LGE lge = new LGE(false, _token, _supply, _devFee, uniswapV2Router, msg.sender, _endTime);
+    function buildLGE(address _token, uint _supply, uint _endTime)external returns(address){
+        LGE lge = new LGE(false, _token, _supply, uniswapV2Router, msg.sender, _endTime);
         emit NewLGE(address(lge));
         return(address(lge));
     }
@@ -68,8 +68,8 @@ contract SupportFactory{
     * @param _devFee is the dev fee to give the dev. Obviously.
     * @param _endTime is the time the LGE is over
      */
-    function buildPresale(address _token, uint _supply, uint _devFee, uint _endTime)external returns(address){
-        LGE pre = new LGE(true, _token, _supply, _devFee, uniswapV2Router, msg.sender, _endTime);
+    function buildPresale(address _token, uint _supply, uint _endTime)external returns(address){
+        LGE pre = new LGE(true, _token, _supply, uniswapV2Router, msg.sender, _endTime);
         emit NewPresale(address(pre));
         return(address(pre));
     }

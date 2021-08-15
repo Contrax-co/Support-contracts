@@ -36,7 +36,6 @@ contract LGE is Ownable{
     bool    _isWhielist,                    //->true if whitelist on who can contribute
     address _token,                         //->ERC20 token
     uint256 _LGESupply,                     //->ERC20 Tokens to be minted for LGE
-    uint256 _devFee,                        //->ERC20 Tokens to be minted for Dev Fee                  
     address _UniswapV2Router02,             //->Address of Uniswap Router             
     address _LPTokenReceiver,               //->Address of the recipitent of Liquidity tokens      
     uint256 _endTime                        //->End time for LGE 
@@ -48,7 +47,6 @@ contract LGE is Ownable{
         LGESupply = _LGESupply;                                         //Note tokens to be sent off in LGE
         token = IContraxMintableERC20(_token);
         token.mint(address(this),_LGESupply);                                //Mint those tokens to contract
-        token.mint(msg.sender,_devFee);                                      //Mint dev fee
         LPTokenReceiver = _LPTokenReceiver;                             //LP Token receiver
         endTime = _endTime;                                             //End time
     }
