@@ -52,7 +52,6 @@ contract SupportFactory{
     * @dev builds an LGE contract
     * @param _token the token to mint for the LGE, lge contract must be given mint permissions
     * @param _supply is the supply to mint for liquidity
-    * @param _devFee is the dev fee to give the dev. Obviously.
     * @param _endTime is the time the LGE is over
      */
     function buildLGE(address _token, uint _supply, uint _endTime)external returns(address){
@@ -65,7 +64,6 @@ contract SupportFactory{
     * @dev builds an Presale contract (just LGE but with a whitelist)
     * @param _token the token to mint for the LGE, lge contract must be given mint permissions
     * @param _supply is the supply to mint for liquidity
-    * @param _devFee is the dev fee to give the dev. Obviously.
     * @param _endTime is the time the LGE is over
      */
     function buildPresale(address _token, uint _supply, uint _endTime)external returns(address){
