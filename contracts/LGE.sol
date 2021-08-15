@@ -44,7 +44,6 @@ contract LGE is Ownable{
     {
         isWhitelist = _isWhielist;
         UniswapV2Router02 = IUniswapV2Router02(_UniswapV2Router02);     //Initialize Uniswap router
-        LGESupply = _LGESupply;                                         //Note tokens to be sent off in LGE
         token = IContraxMintableERC20(_token);
         token.mint(address(this),_LGESupply);                                //Mint those tokens to contract
         LPTokenReceiver = _LPTokenReceiver;                             //LP Token receiver
@@ -95,6 +94,7 @@ contract LGE is Ownable{
         //requires
         require(_isOver());                                                         //Require LGE is over
         require(!LGEComplete);                                                      //Require LGE is not already completed
+        require(IERC20(token).balanceOf(address(this)) >= LGESupply, "Must at least have LGE supply added");
         LGEComplete = true;                                                         //Set LGE to complete
 
         token.approve(address(UniswapV2Router02),LGESupply);                         //Approve LGE tokens to be sent off
