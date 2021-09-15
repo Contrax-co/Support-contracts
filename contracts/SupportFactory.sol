@@ -2,9 +2,11 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./interfaces/IOwnable.sol";
 import "./MasterChef.sol";
 import "./TokenBar.sol";
 import "./LGE.sol";
+import "./NFT.sol";
 
 contract SupportFactory{
     /**
@@ -14,6 +16,7 @@ contract SupportFactory{
     event NewBar(address newBarAddress);
     event NewLGE(address newLGEAddress);
     event NewPresale(address newPresaleAddress);
+    event NewNFT(address newNFTAddress);
 
     address public immutable uniswapV2Router;
 
@@ -34,6 +37,7 @@ contract SupportFactory{
     function buildChef(address _token, uint _coinPerBlock, uint _startBlock, uint _bonusEndBlock)external returns(address){
         MasterChef chef = new MasterChef(_token, msg.sender, _coinPerBlock, _startBlock, _bonusEndBlock);
         emit NewChef(address(chef));
+        IOwnable(address(chef)).transferOwnership(msg.sender);
         return(address(chef));
     }
 
@@ -57,6 +61,7 @@ contract SupportFactory{
     function buildLGE(address _token, uint _supply, uint _endTime)external returns(address){
         LGE lge = new LGE(false, _token, _supply, uniswapV2Router, msg.sender, _endTime);
         emit NewLGE(address(lge));
+        IOwnable(address(lge)).transferOwnership(msg.sender);
         return(address(lge));
     }
 
@@ -69,7 +74,15 @@ contract SupportFactory{
     function buildPresale(address _token, uint _supply, uint _endTime)external returns(address){
         LGE pre = new LGE(true, _token, _supply, uniswapV2Router, msg.sender, _endTime);
         emit NewPresale(address(pre));
+        IOwnable(address(pre)).transferOwnership(msg.sender);
         return(address(pre));
+    }
+
+    function buildNFT(string memory _name, string memory _symbol) external returns(address){
+        NFT nft = new NFT(_name,_symbol);
+        IOwnable(address(nft)).transferOwnership(msg.sender);
+        emit NewNFT(address(nft));
+        return(address(nft));
     }
 
 }
