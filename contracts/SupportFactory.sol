@@ -78,6 +78,11 @@ contract SupportFactory{
         return(address(pre));
     }
 
+    /**
+    * @dev builds an NFT contract
+    * @param _name is the name
+    * @param _symbol is the symbol
+     */
     function buildNFT(string memory _name, string memory _symbol) external returns(address){
         NFT nft = new NFT(_name,_symbol);
         IOwnable(address(nft)).transferOwnership(msg.sender);
